@@ -14,9 +14,6 @@ public class Main {
         //buttons
         JButton exitButton = new JButton("X");
         JButton minimizeButton = new JButton("_");
-        JButton allTodo = new JButton("All");
-        JButton pendingTodo = new JButton("Pending");
-        JButton completedTodo = new JButton("Complated");
 
         //framesfor app
         JLabel appTopFrame = new JLabel();
@@ -24,65 +21,6 @@ public class Main {
         JLabel appTodoImage = new JLabel();
         JPanel appleftFrame = new JPanel();
         JPanel appRightFrame = new JPanel();
-
-        //to-do elements
-        //text field
-        JTextField todoTextIn = new JTextField();
-
-        //lable for text on top to-doinput text field
-        JLabel placeTodoText = new JLabel();
-
-
-
-        //----------------------------------------------------------------------------------------------------------TODOS FILTER START
-        //all
-        allTodo.setBounds(480, 90, 45, 35);
-        allTodo.setFocusable(false);
-        allTodo.setBackground(new Color(12, 12, 12));
-        allTodo.setFont(new Font("Arial", Font.BOLD, 16));
-        allTodo.setForeground(new Color(250,50, 97));
-        allTodo.setBorder(null);
-
-        //PENDING
-        pendingTodo.setBounds(517, 90, 85, 35);
-        pendingTodo.setFocusable(false);
-        pendingTodo.setBackground(new Color(12, 12, 12));
-        pendingTodo.setFont(new Font("Arial", Font.BOLD, 16));
-        pendingTodo.setForeground(new Color(250,50, 97));
-        pendingTodo.setBorder(null);
-
-        //COMPLATED
-        completedTodo.setBounds(597, 90, 95, 35);
-        completedTodo.setFocusable(false);
-        completedTodo.setBackground(new Color(12, 12, 12));
-        completedTodo.setFont(new Font("Arial", Font.BOLD, 16));
-        completedTodo.setForeground(new Color(250,50, 97));
-        completedTodo.setBorder(null);
-
-        //----------------------------------------------------------------------------------------------------------TODOS FILTER END
-
-
-        //----------------------------------------------------------------------------------------------------------TODOTEXT AND TEXT INPUT START
-
-        //todoText in
-        placeTodoText.setBounds(30,65,300,30);
-        placeTodoText.setBackground(new Color(12, 12, 12));
-        placeTodoText.setFont(new Font("Arial", Font.PLAIN, 14));
-        placeTodoText.setText("Enter todo:");
-        placeTodoText.setForeground(Color.LIGHT_GRAY);
-
-
-        //todoTextInput
-        todoTextIn.setBounds(30,90,300,50);
-        todoTextIn.setBackground(new Color(12, 12, 12));
-        todoTextIn.setFont(new Font("Arial", Font.PLAIN, 20));
-        todoTextIn.setForeground(new Color(195, 195, 195));
-        todoTextIn.setCaretColor(new Color(195, 195, 195));
-        todoTextIn.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
-
-
-        //----------------------------------------------------------------------------------------------------------TODOTEXT AND TEXT INPUT END
-
 
         //----------------------------------------------------------------------------------------------------------IMAGES AND FRAMES START
         //------------------------------------------------topFrame address
@@ -152,7 +90,6 @@ public class Main {
 
         //----------------------------------------------------------------------------------------------------------MINIMIZE AND MAXIMIZE BUTTON END
 
-
         //----------------------------------------------------------------------------------------------------------MINIMIZE AND MAXIMIZE BUTTON MOUSELISTENERS ALSO APP MOVE  START
         // Add minimize button event listener
         minimizeButton.addMouseListener(new MouseAdapter() {
@@ -200,14 +137,16 @@ public class Main {
         //----------------------------------------------------------------------------------------------------------MINIMIZE AND MAXIMIZE BUTTON MOUSELISTENERS ALSO APP MOVE END
 
         //----------------------------------------------------------------------------------------------------------PUSH ELEMENTS ON FRAME START
-        appFrame.add(allTodo);
-        appFrame.add(pendingTodo);
-        appFrame.add(completedTodo);
-        appFrame.add(placeTodoText);
-        appFrame.add(todoTextIn);
+        ActionClass actionClass = new ActionClass();
+        appFrame.add(actionClass.scrollPane);
+        appFrame.add(actionClass.allTodo);
+        appFrame.add(actionClass.pendingTodo);
+        appFrame.add(actionClass.completedTodo);
+        appFrame.add(actionClass.placeTodoText);
+        appFrame.add(actionClass.todoTextIn);
+        appFrame.add(appTodoImage);
         appFrame.add(appTopFrame);
         appFrame.add(appBottomFrame);
-        appFrame.add(appTodoImage);
         appFrame.add(appleftFrame);
         appFrame.add(appRightFrame);
         appFrame.add(linePanel);
@@ -225,7 +164,5 @@ public class Main {
 
         // Make the JFrame visible
         appFrame.setVisible(true);
-        //----------------------------------------------------------------------------------------------------------PUSH ELEMENTS ON FRAME END
-
     }
 }
