@@ -49,7 +49,7 @@ public class Main {
         appTodoImage = new JLabel();
         //makeing cp image sizes
         appTodoImage.setIcon(new ImageIcon(image3));
-        appTodoImage.setBounds(30, 170, 300, 200);
+        appTodoImage.setBounds(30, 150, 300, 200);
 
 
         //------------------------------------------------leftFrame
@@ -78,7 +78,7 @@ public class Main {
         minimizeButton.setBackground(new Color(12, 12, 12));
         minimizeButton.setFont(new Font("Arial", Font.BOLD, 16));
         minimizeButton.setForeground(new Color(250,50, 97));
-        minimizeButton.setBorder(BorderFactory.createLineBorder(new Color(100, 141, 244), 1));
+        minimizeButton.setBorder(BorderFactory.createLineBorder(new Color(195,195,195), 1));
 
         //exitbutton
         exitButton.setBounds(830, 7, 45, 35);
@@ -86,7 +86,7 @@ public class Main {
         exitButton.setBackground(new Color(12, 12, 12));
         exitButton.setFont(new Font("Arial", Font.BOLD, 16));
         exitButton.setForeground(new Color(250,50, 97));
-        exitButton.setBorder(BorderFactory.createLineBorder(new Color(100, 141, 244), 1));
+        exitButton.setBorder(BorderFactory.createLineBorder(new Color(195,195,195), 1));
 
         //----------------------------------------------------------------------------------------------------------MINIMIZE AND MAXIMIZE BUTTON END
 
@@ -144,6 +144,7 @@ public class Main {
         appFrame.add(actionClass.completedTodo);
         appFrame.add(actionClass.placeTodoText);
         appFrame.add(actionClass.todoTextIn);
+        appFrame.add(actionClass.todoLS);
         appFrame.add(appTodoImage);
         appFrame.add(appTopFrame);
         appFrame.add(appBottomFrame);
