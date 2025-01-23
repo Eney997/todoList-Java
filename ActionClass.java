@@ -8,12 +8,10 @@ import java.util.Objects;
 
 public class ActionClass implements KeyListener, ActionListener {
 
-    int i = 1;
     JScrollPane scrollPane;
     JButton allTodo = new JButton("All Todo");
     JButton pendingTodo = new JButton("Pending");
     JButton completedTodo = new JButton("Complete");
-    //text field
     JTextField todoTextIn = new JTextField();
     JLabel placeTodoText = new JLabel();
     JPanel panel = new JPanel();
@@ -22,11 +20,10 @@ public class ActionClass implements KeyListener, ActionListener {
     ImageIcon xIcon;
     ImageIcon checkIcon;
 
-
     ActionClass()
     {
         //----------------------------------------------------------------------------------------------------------VERTICAL SCROLL BAR JPANELS START
-        // Create a JPanel with a vertical layout and a large preferred size
+        // jpanel + vertical layout
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));// Vertical layout
         panel.setBackground(new Color(12,12,12));
         panel.setBorder(null);
@@ -34,7 +31,7 @@ public class ActionClass implements KeyListener, ActionListener {
         //panel.setBorder(BorderFactory.createLineBorder(new Color(100, 141, 244),1));
         panel.setVisible(false);
 
-        // Wrap the JPanel in a JScrollPane
+        // panel + scrollPanel
         scrollPane = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setBounds(460, 90, 410, 300);
         scrollPane.setVisible(false);
@@ -119,30 +116,31 @@ public class ActionClass implements KeyListener, ActionListener {
                 int labelWidth = 300;
                 int labelHeight = 30;
 
-                // Panel for each todo item
+                // panel for each todo item
                 JPanel todoPanel = new JPanel(null);
                 todoPanel.setPreferredSize(new Dimension(labelWidth, labelHeight));
                 todoPanel.setBackground(new Color(12, 12, 12));
 
-                // Create a new JLabel instance for each todo
+                // create a new JLabel for each todo
                 JLabel todoLabel = new JLabel("T." + todoText);
                 todoLabel.setForeground(Color.WHITE);
                 todoLabel.setFont(new Font("Arial", Font.BOLD, 16));
                 todoLabel.setBounds(10, 5, labelWidth, labelHeight); // Leave space for the button
 
-                // Remove todo button
+                // remove todo button
                 JCheckBox removeTodo = new JCheckBox();
                 xIcon = new ImageIcon(Objects.requireNonNull(Main.class.getResource("/Assets/remove.png")));
 
-                removeTodo.setBounds(labelWidth + 60, 5, 30, 23); // Fixed position on the right
+                removeTodo.setBounds(labelWidth + 60, 5, 30, 23); // fixed position for remove chbox
                 removeTodo.setFocusable(false);
                 removeTodo.setBackground(new Color(12, 12, 12));
                 removeTodo.setFont(new Font("Arial", Font.BOLD, 15));
                 removeTodo.setForeground(new Color(250, 50, 97));
                 removeTodo.setBorder(null);
                 removeTodo.setIcon(xIcon);
-                removeTodo.addActionListener(e1 -> {
-                    panel.remove(todoPanel); // Remove the entire todo panel
+                //lambda for remove todo
+                removeTodo.addActionListener(ae1 -> {
+                    panel.remove(todoPanel); // remove entire todo panel
                     panel.revalidate();
                     panel.repaint();
                 });
@@ -152,43 +150,39 @@ public class ActionClass implements KeyListener, ActionListener {
                 oIcon = new ImageIcon(Objects.requireNonNull(Main.class.getResource("/Assets/ou.png")));
                 checkIcon = new ImageIcon(Objects.requireNonNull(Main.class.getResource("/Assets/xu.png")));
 
-                completedCheckBox.setBounds(labelWidth + 40, 5, 20, 23); // Fixed position on the right
+                completedCheckBox.setBounds(labelWidth + 40, 5, 20, 23); // Fixed position for compl chbox
                 completedCheckBox.setFocusable(false);
                 completedCheckBox.setBackground(new Color(12, 12, 12));
                 completedCheckBox.setBorder(null);
                 completedCheckBox.setIcon(oIcon);
                 completedCheckBox.setSelectedIcon(checkIcon);
-                completedCheckBox.addItemListener(e1 -> {
+                //lambda for compl todo
+                completedCheckBox.addItemListener(ae2 -> {
                     if (completedCheckBox.isSelected()) {
-                        // Mark as completed
-                        todoLabel.setForeground(new Color(250,50, 97)); // Change color to indicate completion
+                        // as completed
+                        todoLabel.setForeground(new Color(250,50, 97));
                     } else {
-                        // Mark as pending
-                        todoLabel.setForeground(Color.WHITE); // Change color back to pending style
+                        //  as pending
+                        todoLabel.setForeground(Color.WHITE);
                     }
                 });
 
-                // Add label, button, and checkbox to the todo panel
+                // add label button and checkbox to the todo panel
                 todoPanel.add(todoLabel);
                 todoPanel.add(removeTodo);
                 todoPanel.add(completedCheckBox);
 
-                // Add the todo panel to the main panel
+                // add todo panel to main panel
                 panel.add(todoPanel);
                 panel.revalidate();
                 panel.repaint();
 
-                //open todoBox
-
-                for (Component component : panel.getComponents()) {
-                    component.setVisible(true);
-                }
-
+                //make todo visible
                 panel.setVisible(true);
                 scrollPane.setVisible(true);
                 todoLS.setVisible(false);
 
-                // Reset the input field
+                // reset the input
                 todoTextIn.setText("");
                 placeTodoText.setText("Enter todo:");
                 placeTodoText.setForeground(Color.LIGHT_GRAY);
@@ -215,8 +209,9 @@ public class ActionClass implements KeyListener, ActionListener {
     {
         if(e.getSource() == allTodo)
         {
-            // Show all todos
-            for (Component component : panel.getComponents()) {
+
+            for(Component component : panel.getComponents())
+            {
                 component.setVisible(true);
             }
 
@@ -224,42 +219,63 @@ public class ActionClass implements KeyListener, ActionListener {
             scrollPane.setVisible(true);
             todoLS.setVisible(false);
             // Repaint and revalidate the panel to reflect changes
-            panel.revalidate();
-            panel.repaint();
+            //panel.revalidate();
+           // panel.repaint();
         }
 
-        else if(e.getSource() == pendingTodo)
+        else if (e.getSource() == pendingTodo)
         {
-            // Show all todos
             for (Component component : panel.getComponents()) {
-                component.setVisible(true);
+                if (component instanceof JPanel todoPanel) {
+                    boolean isPending = true;
+                    for (Component child : todoPanel.getComponents()) {
+                        if (child instanceof JCheckBox checkBox) {
+                            // Determine if this todo is completed
+                            if (checkBox.isSelected()) {
+                                isPending = false; // If selected, it's completed
+                                break;
+                            }
+                        }
+                    }
+                    // Set the visibility based on whether the todo is pending
+                    todoPanel.setVisible(isPending);
+                }
             }
 
             panel.setVisible(true);
             scrollPane.setVisible(true);
             todoLS.setVisible(false);
             // Repaint and revalidate the panel to reflect changes
-            panel.revalidate();
-            panel.repaint();
+            //panel.revalidate();
+            //panel.repaint();
         }
 
-        else if(e.getSource() == completedTodo)
+        else if (e.getSource() == completedTodo)
         {
-            // Show all todos
             for (Component component : panel.getComponents()) {
-                component.setVisible(true);
+                if (component instanceof JPanel todoPanel) {
+                    boolean isPending = false;
+                    for (Component child : todoPanel.getComponents()) {
+                        if (child instanceof JCheckBox checkBox) {
+                            // Determine if this todo is completed
+                            if (checkBox.isSelected()) {
+                                isPending = true; // If selected, it's completed
+                                break;
+                            }
+                        }
+                    }
+                    // Set the visibility based on whether the todo is pending
+                    todoPanel.setVisible(isPending);
+                }
             }
 
             panel.setVisible(true);
             scrollPane.setVisible(true);
             todoLS.setVisible(false);
             // Repaint and revalidate the panel to reflect changes
-            panel.revalidate();
-            panel.repaint();
+            //panel.revalidate();
+            //panel.repaint();
         }
-
-
-
     }
     //----------------------------------------------keyEVENTS END
 }

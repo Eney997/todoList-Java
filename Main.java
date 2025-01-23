@@ -91,7 +91,7 @@ public class Main {
         //----------------------------------------------------------------------------------------------------------MINIMIZE AND MAXIMIZE BUTTON END
 
         //----------------------------------------------------------------------------------------------------------MINIMIZE AND MAXIMIZE BUTTON MOUSELISTENERS ALSO APP MOVE  START
-        // Add minimize button event listener
+        // add minimize button event listener
         minimizeButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -100,7 +100,7 @@ public class Main {
             }
         });
 
-        // Add exit button event listener
+        // add exit button event listener
         exitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -163,7 +163,7 @@ public class Main {
         //rounded window
         appFrame.setShape(new java.awt.geom.RoundRectangle2D.Double(0, 0, 900, 500, 19, 19));
 
-        // Make the JFrame visible
+        // visible frame
         appFrame.setVisible(true);
     }
 }
