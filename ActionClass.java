@@ -8,11 +8,10 @@ import java.util.Objects;
 
 public class ActionClass implements KeyListener, ActionListener {
 
-    int i = 1;
     JScrollPane scrollPane;
     JButton allTodo = new JButton("All Todo");
     JButton pendingTodo = new JButton("Pending");
-    JButton completedTodo = new JButton("Complete");
+    JButton completedTodo = new JButton("Completed");
     JTextField todoTextIn = new JTextField();
     JLabel placeTodoText = new JLabel();
     JPanel panel = new JPanel();
@@ -74,7 +73,7 @@ public class ActionClass implements KeyListener, ActionListener {
         placeTodoText.setBounds(30,65,300,30);
         placeTodoText.setBackground(new Color(12, 12, 12));
         placeTodoText.setFont(new Font("Arial", Font.PLAIN, 14));
-        placeTodoText.setText("Enter todo:");
+        placeTodoText.setText("Enter Todo:");
         placeTodoText.setForeground(Color.LIGHT_GRAY);
 
         //todoTextInput
@@ -112,7 +111,7 @@ public class ActionClass implements KeyListener, ActionListener {
                 todoPanel.setBackground(new Color(12, 12, 12));
 
                 // create a new JLabel for each todo
-                JLabel todoLabel = new JLabel(i + ")" + todoText);
+                JLabel todoLabel = new JLabel( "**" + todoText);
                 todoLabel.setForeground(Color.WHITE);
                 todoLabel.setFont(new Font("Arial", Font.BOLD, 16));
                 todoLabel.setBounds(10, 5, labelWidth, labelHeight); // Leave space for the button
@@ -177,7 +176,6 @@ public class ActionClass implements KeyListener, ActionListener {
                 placeTodoText.setForeground(Color.LIGHT_GRAY);
                 todoTextIn.setForeground(new Color(195, 195, 195));
                 todoTextIn.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
-                i++;
             } else {
                 placeTodoText.setText("Enter todo: Wrong todo.");
                 placeTodoText.setForeground(new Color(250,50, 97));
