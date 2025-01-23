@@ -144,7 +144,6 @@ public class Main {
         appFrame.add(actionClass.completedTodo);
         appFrame.add(actionClass.placeTodoText);
         appFrame.add(actionClass.todoTextIn);
-        appFrame.add(actionClass.todoLS);
         appFrame.add(appTodoImage);
         appFrame.add(appTopFrame);
         appFrame.add(appBottomFrame);
